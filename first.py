@@ -30,7 +30,7 @@ def fetch_all_products(max_pages):
     return all_products_data
 
 # Récupérer les données de 10 pages par exemple
-all_products_data = fetch_all_products(10)
+all_products_data = fetch_all_products(1000)
 
 # Afficher un échantillon des données récupérées
 print(f"Nombre total de produits récupérés : {len(all_products_data)}")
