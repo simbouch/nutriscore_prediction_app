@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="FR-fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport", content="width=device-width, initial scale=1.0">
+    <title>Nutriscore Wizard</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>Nutriscore Wizard</h1>
+    
+    <h3>Entrez les nutriments de votre aliment pour prédire son nutri-score :</h3>
+    <h4>Laissez le champ vide si vous n'avez pas l'information requise.</h4>
+
+    <style>
+        /* Container for the form with grid layout */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            width: 400px;
+            margin: 0 auto;
+        }
+
+        /* Make label and input stack within each grid cell */
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Basic styling for inputs and button */
+        input, button {
+            padding: 8px;
+            font-size: 16px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Center-align the submit button across two columns */
+        .submit-btn {
+            grid-column: span 2;
+            padding: 10px;
+        }
+    </style>
+
+    <form id="nutrients_form" method="POST" action="{{ url_for('nutriscore_form') }}" class="form-grid">
+
+        <div class="form-group">
+            <label for="fat_100g">Matières grasses :</label>
+            <input type="number" id="fat_100g" step="0.01", name="fat_100g">
+
+            <label for="saturated-fat_100g">Acides gras saturés :</label>
+            <input type="number" id="saturated-fat_100g" step="0.01", name="saturated-fat_100g">
+
+            <label for="carbohydrates_100g">Glucides :</label>
+            <input type="number" id="carbohydrates_100g" step="0.01", name="carbohydrates_100g">
+
+            <label for="sugars_100g">Sucres :</label>
+            <input type="number" id="sugars_100g" step="0.01", name="sugars_100g">
+
+            <label for="fiber_100g">Fibres :</label>
+            <input type="number" id="fiber_100g" step="0.01", name="fiber_100g">
+        </div>
+
+        <div class="form-group">
+            <label for="proteins_100g">Protéines :</label>
+            <input type="number" id="proteins_100g" step="0.01", name="proteins_100g">
+
+            <label for="salt_100g">Sel :</label>
+            <input type="number" id="salt_100g" step="0.01", name="salt_100g">
+
+            <label for="sodium_100g">Sodium :</label>
+            <input type="number" id="sodium_100g" step="0.01", name="sodium_100g">
+
+            <label for="fvn_estimate_100g">Fruits, légumes, noix :</label>
+            <input type="number" id="fvn_estimate_100g" step="0.01", name="fvn_estimate_100g">
+
+            <label for="energy-kcal_100g">Valeur énergétique (kcal) :</label>
+            <input type="number" id="energy-kcal_100g" step="0.01", name="energy-kcal_100g">
+        </div>
+        <button type="submit">Prédire</button>
+    </form>
+
+    <h1 id="response_message" style="margin-top: 20px; color: blue;" text-align="center"></h1>
+
+    <script>
+        $(document).ready(function() {
+            $('#nutrients_form').on('submit', function(event) {
+                event.preventDefault(); // Prevent the form from submitting traditionally
+
+                // Send an AJAX POST request
+                $.ajax({
+                    url: "/nutriscore_form",
+                    type: "POST",
+                    data: $(this).serialize(),
+                    success: function(response) {
+                        // Display the response message under the form
+                        $('#response_message').text(response.message);
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        $('#response_message').text("Error: "+errorThrown);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
