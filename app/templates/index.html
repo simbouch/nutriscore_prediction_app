@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutri-Score Prediction</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="bg-primary text-white text-center py-3">
+        <h1>Nutri-Score Prediction App</h1>
+    </header>
+
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Enter Product Details</h2>
+        <form action="/predict" method="POST" class="border p-4 rounded bg-light">
+            <!-- Categorical Inputs -->
+            <div class="form-group">
+                <label for="categories">Categories</label>
+                <input type="text" class="form-control" id="categories" name="categories" required>
+            </div>
+            <div class="form-group">
+                <label for="pnns_groups_1">PNNS Group 1</label>
+                <input type="text" class="form-control" id="pnns_groups_1" name="pnns_groups_1" required>
+            </div>
+            <div class="form-group">
+                <label for="pnns_groups_2">PNNS Group 2</label>
+                <input type="text" class="form-control" id="pnns_groups_2" name="pnns_groups_2" required>
+            </div>
+            <div class="form-group">
+                <label for="food_groups">Food Groups</label>
+                <input type="text" class="form-control" id="food_groups" name="food_groups" required>
+            </div>
+
+            <!-- Numerical Inputs -->
+            <div class="form-group">
+                <label for="energy-kcal_100g">Energy (kcal/100g)</label>
+                <input type="number" step="any" class="form-control" id="energy-kcal_100g" name="energy-kcal_100g" required>
+            </div>
+            <div class="form-group">
+                <label for="fat_100g">Fat (g/100g)</label>
+                <input type="number" step="any" class="form-control" id="fat_100g" name="fat_100g" required>
+            </div>
+            <div class="form-group">
+                <label for="saturated-fat_100g">Saturated Fat (g/100g)</label>
+                <input type="number" step="any" class="form-control" id="saturated-fat_100g" name="saturated-fat_100g" required>
+            </div>
+            <div class="form-group">
+                <label for="carbohydrates_100g">Carbohydrates (g/100g)</label>
+                <input type="number" step="any" class="form-control" id="carbohydrates_100g" name="carbohydrates_100g" required>
+            </div>
+            <div class="form-group">
+                <label for="sugars_100g">Sugars (g/100g)</label>
+                <input type="number" step="any" class="form-control" id="sugars_100g" name="sugars_100g" required>
+            </div>
+            <div class="form-group">
+                <label for="fiber_100g">Fiber (g/100g)</label>
+                <input type="number" step="any" class="form-control" id="fiber_100g" name="fiber_100g" required>
+            </div>
+            <div class="form-group">
+                <label for="proteins_100g">Proteins (g/100g)</label>
+                <input type="number" step="any" class="form-control" id="proteins_100g" name="proteins_100g" required>
+            </div>
+            <div class="form-group">
+                <label for="salt_100g">Salt (g/100g)</label>
+                <input type="number" step="any" class="form-control" id="salt_100g" name="salt_100g" required>
+            </div>
+            <div class="form-group">
+                <label for="fruits-vegetables-nuts-estimate-from-ingredients_100g">Fruits, Vegetables, Nuts Estimate (g/100g)</label>
+                <input type="number" step="any" class="form-control" id="fruits-vegetables-nuts-estimate-from-ingredients_100g" name="fruits-vegetables-nuts-estimate-from-ingredients_100g" required>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary btn-block">Predict Nutri-Score</button>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p>&copy; 2024 Nutri-Score Prediction App</p>
+    </footer>
+</body>
+</html>
