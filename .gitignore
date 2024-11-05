@@ -161,6 +161,3 @@ cython_debug/
 
 CSV/
 cleaned_csv
-
-app/run_api.py/
-app/run_api.py
