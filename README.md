@@ -1,7 +1,7 @@
-NutriScore Wizard
+### NutriScore Wizard
 NutriScore Wizard is a web application that predicts the NutriScore grade for food products based on their nutritional information. The app provides an intuitive interface for users to input product details, and it returns an easy-to-understand NutriScore grade, helping users make informed dietary choices.
 
-Table of Contents
+### Table of Contents
 Project Overview
 Features
 Tech Stack
