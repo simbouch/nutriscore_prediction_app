@@ -1,49 +1,43 @@
-from flask import Blueprint, render_template, request, redirect, url_for, current_app
+from flask import Blueprint, render_template, jsonify, request
+import pandas as pd
+from .models import load_model_pipeline
 
-# Define a Blueprint for the main routes
-main = Blueprint("main", __name__)
+# Blueprint for API and main routes
+api = Blueprint('api', __name__)
 
-@main.route("/", methods=["GET"])
-def index():
-    """Render the homepage with the input form."""
+# Load the saved model pipeline
+model_pipeline = load_model_pipeline()
+
+# Route to render the main index page
+@api.route("/", methods=["GET"])
+def home():
     return render_template("index.html")
 
-@main.route("/predict", methods=["POST"])
+# Prediction route
+@api.route("/predict", methods=["POST"])
 def predict():
-    """Handle the form submission, perform prediction, and display the result."""
+    """API endpoint to predict Nutri-Score grade based on input features."""
     try:
-        # Collect form data
-        categorical_data = [
-            request.form.get("categories"),
-            request.form.get("pnns_groups_1"),
-            request.form.get("pnns_groups_2"),
-            request.form.get("food_groups")
-        ]
-        numerical_data = [
-            float(request.form.get("energy-kcal_100g", 0)),
-            float(request.form.get("fat_100g", 0)),
-            float(request.form.get("saturated-fat_100g", 0)),
-            float(request.form.get("carbohydrates_100g", 0)),
-            float(request.form.get("sugars_100g", 0)),
-            float(request.form.get("fiber_100g", 0)),
-            float(request.form.get("proteins_100g", 0)),
-            float(request.form.get("salt_100g", 0)),
-            float(request.form.get("fruits-vegetables-nuts-estimate-from-ingredients_100g", 0))
-        ]
+        # Collect and parse input data from JSON
+        input_data = request.json
+        
+        # Convert to DataFrame to match model input format
+        df = pd.DataFrame([input_data])
+        
+        # Make prediction using the model pipeline
+        prediction = model_pipeline.predict(df)[0]
+        
+        # Extended prediction mapping to handle lowercase predictions
+        prediction_mapping = {
+            1: 'A', 2: 'B', 3: 'C', 4: 'D', 5: 'E', 
+            'a': 'A', 'b': 'B', 'c': 'C', 'd': 'D', 'e': 'E'
+        }
+        prediction_grade = prediction_mapping.get(prediction, prediction)
 
-        # Combine all data for prediction
-        data = categorical_data + numerical_data
-        print("Form data received:", data)  # Debugging print statement
-
-        # Access the model from the current app context
-        model = current_app.model
-        prediction = model.predict([data])[0]  # Perform prediction
-
-        print("Prediction result:", prediction)  # Debugging print statement
-
-        # Render the result page with the prediction
-        return render_template("result.html", prediction=prediction)
+        # Return prediction result as JSON
+        return jsonify({"prediction": prediction_grade})
 
     except Exception as e:
+        # Log any errors encountered during prediction
         print(f"Error during prediction: {e}")
-        return redirect(url_for("main.index"))
+        return jsonify({"error": str(e)}), 500

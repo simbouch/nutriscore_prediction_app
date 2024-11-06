@@ -1,5 +1,4 @@
-import os
-
+# config.py
 class Config:
-    SECRET_KEY = os.environ.get("SECRET_KEY") 
-    MODEL_PATH = os.path.join("trained_models", "best_model.joblib")
+    DEBUG = True
+    MODEL_PATH = "C:/data/simplon_dev_ia_projects/flask_projects/nutriscore_prediction_app/trained_models/best_model_pipeline.joblib"
