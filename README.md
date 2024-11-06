@@ -29,12 +29,12 @@ Machine Learning: Scikit-learn for training and prediction
 Database: None (Data is processed in-memory for predictions)
 APIs: RESTful API for NutriScore prediction
 Installation
-Clone the repository:
+### Clone the repository:
 
 
 git clone https://github.com/your-username/nutriscore-wizard.git
 cd nutriscore-wizard
-Create a virtual environment and activate it:
+### Create a virtual environment and activate it:
 
 
 python3 -m venv venv
@@ -47,15 +47,15 @@ Run the Flask application:
 
 
 python run.py
-Access the application: Open your browser and navigate to http://127.0.0.1:5000
+### Access the application: Open your browser and navigate to http://127.0.0.1:5000
 
-Usage
+### Usage
 Enter Nutritional Information: Use the form to input relevant product data (e.g., calories, fat, fiber, etc.).
 Predict NutriScore: Click the "Get NutriScore" button to receive the prediction.
 View Results: The predicted NutriScore will appear on the same page, indicating the health grade for the product.
 API Endpoints
 POST /predict
-Description: Provides a prediction for the NutriScore grade based on input data.
+### Description: Provides a prediction for the NutriScore grade based on input data.
 
 Request Format (JSON):
 
