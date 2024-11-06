@@ -10,7 +10,7 @@
     <h1>Nutriscore Wizard</h1>
     
     <h3>Entrez les nutriments de votre aliment pour prédire son nutri-score :</h3>
-    <h4>Laissez le champ vide si vous n'avez pas l'information requise.</h4>
+    <h4>Laissez le champ à 0 si vous n'avez pas l'information requise.</h4>
 
     <style>
         /* Container for the form with grid layout */
@@ -43,7 +43,7 @@
         }
     </style>
 
-    <form id="nutrients_form" method="POST" action="{{ url_for('nutriscore_form') }}" class="form-grid">
+    <form id="nutrients_form" method="POST" action="{{ url_for('main.nutriscore_form') }}" class="form-grid">
 
         <div class="form-group">
             <label for="fat_100g">Matières grasses :</label>
