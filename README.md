@@ -31,21 +31,25 @@ APIs: RESTful API for NutriScore prediction
 Installation
 Clone the repository:
 
-
+bash
+Copy code
 git clone https://github.com/your-username/nutriscore-wizard.git
 cd nutriscore-wizard
 Create a virtual environment and activate it:
 
-
+bash
+Copy code
 python3 -m venv venv
 source venv/bin/activate  # On Windows, use venv\Scripts\activate
 Install dependencies:
 
-
+bash
+Copy code
 pip install -r requirements.txt
 Run the Flask application:
 
-
+bash
+Copy code
 python run.py
 Access the application: Open your browser and navigate to http://127.0.0.1:5000
 
@@ -59,6 +63,8 @@ Description: Provides a prediction for the NutriScore grade based on input data.
 
 Request Format (JSON):
 
+json
+Copy code
 {
   "pnns_groups_1": "sugary snacks",
   "pnns_groups_2": "biscuits and cakes",
@@ -74,7 +80,8 @@ Request Format (JSON):
 }
 Response Format (JSON):
 
-
+json
+Copy code
 {
   "prediction": "A"
 }
@@ -93,11 +100,11 @@ nutriscore_prediction_app/
 │   ├── models.py               # Machine learning model loading
 │   ├── templates/
 │   │   ├── index.html          # Main form for input
-│   │   
+│   │   └── result.html         # Display prediction result (if used separately)
 │   └── static/
 │       ├── style.css           # Custom CSS
 ├── data/
-│   └── final_csv_4.csv         # Dataset used for training 
+│   └── final_csv_4.csv         # Dataset used for training
 ├── notebooks/                  # Jupyter notebooks for model training
 ├── tests/                      # Test cases for API
 ├── trained_models/
@@ -120,4 +127,4 @@ Commit your changes (git commit -m 'Add new feature').
 Push to your branch (git push origin feature-name).
 Open a Pull Request.
 License
-This project is licensed under the MIT License. See LICENSE for more informa
+This project is licensed under the MIT License. See LICENSE for more information.
