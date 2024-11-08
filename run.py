@@ -1,13 +1,16 @@
 # run.py
 from app import create_app
-import webbrowser
-from threading import Timer
+import os
 
 app = create_app()
 
 def open_browser():
-    webbrowser.open_new("http://127.0.0.1:5000/")
+    if os.environ.get("FLASK_RUN_IN_DOCKER") != "1":
+        import webbrowser
+        from threading import Timer
+        Timer(1, lambda: webbrowser.open("http://127.0.0.1:5000/")).start()
 
 if __name__ == "__main__":
-    Timer(1, open_browser).start()
-    app.run(debug=True)
+    open_browser()
+    # Lancer l'application sur toutes les interfaces
+    app.run(host="0.0.0.0", port=5000, debug=True)
