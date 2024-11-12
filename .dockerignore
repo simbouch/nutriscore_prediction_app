@@ -1,0 +1,39 @@
+# Exclure les fichiers Python compilés
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+
+# Exclure les environnements virtuels
+env/
+venv/
+ENV/
+VENV/
+
+# Exclure les fichiers de configuration sensibles
+*.env
+
+# Exclure les fichiers de logs
+*.log
+
+# Exclure les fichiers de données volumineux
+*.csv
+*.json
+
+# Exclure les fichiers Git
+.git
+.gitignore
+
+# Exclure les fichiers Docker
+Dockerfile
+docker-compose.yml
+
+# Exclure les fichiers IDE
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Exclure les fichiers temporaires
+tmp/
+temp/

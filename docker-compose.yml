@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+    container_name: nutriscore_app
+    ports:
+      - "5000:5000"  # Expose port 5000 to the host
+    environment:
+      - FLASK_APP=run.py
+      - DATABASE_HOST=nutriscore_db
+      - DATABASE_NAME=nutriscore
+      - DATABASE_USER=myuser
+      - DATABASE_PASSWORD=mypassword
+    volumes:
+      - .:/app
+    depends_on:
+      - nutriscore_db
+    networks:
+      - nutriscore_network
+
+  nutriscore_db:
+    image: postgres:15
+    container_name: nutriscore_db
+    environment:
+      POSTGRES_DB: nutriscore
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - nutriscore_network
+
+volumes:
+  db_data:
+
+networks:
+  nutriscore_network:
